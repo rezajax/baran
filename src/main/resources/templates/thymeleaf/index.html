@@ -1,11 +1,451 @@
-<!DOCTYPE html >
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="fa">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<span th:text="${user.name}"></span>
-</body>
-</html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه تمرینی</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <!-- Include html2canvas CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    <style>
+        /* Material Design Colors */
+        :root {
+            --primary-color: #C61C1E;
+            --primary-light: #FAD4D5;
+            --primary-dark: #960000;
+            --text-on-primary: #ffffff;
+            --secondary-color: #333333;
+            --background-color: #F5F5F5;
+            --surface-color: #ffffff;
+            --error-color: #D32F2F;
+            --divider-color: #E0E0E0;
+        }
+
+        /* Global Styles */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
+        }
+
+        .container-wrapper {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 16px;
+        }
+
+        .container {
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            padding: 16px;
+        }
+
+        #training-image {
+            width: 200px;
+            height: auto;
+            display: block;
+            /* background-color: #333333; */
+        }
+
+        h1,
+        h2,
+        h3 {
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 16px 0 8px;
+            color: var(--primary-dark);
+        }
+
+        .info {
+            margin-bottom: 16px;
+            padding: 16px;
+            background-color: var(--primary-light);
+            border-radius: 8px;
+        }
+
+        .info p {
+            font-size: 1rem;
+            margin: 4px 0;
+            line-height: 1.5;
+            color: var(--primary-dark);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid var(--divider-color);
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            font-size: 0.9rem;
+            padding: 8px;
+        }
+
+        td {
+            font-size: 0.9rem;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: var(--background-color);
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--surface-color);
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            font-size: 1.5rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            th,
+            td {
+                font-size: 0.8rem;
+                padding: 6px;
+            }
+        }
+
+
+
+
+        #splash-screen p {
+            margin-top: 16px;
+            font-size: 1.2rem;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--text-on-primary);
+            border-top: 5px solid var(--primary-dark);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* Button styles */
+        #export-pdf {
+            margin: 20px;
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: var(--text-on-primary);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+<!-- Splash Screen -->
+<div id="splash-screen">
+    <div class="loading-spinner"></div>
+    <p>در حال بارگذاری...</p>
+</div>
+
+
+<div class="container-wrapper">
+
+    <h1>Export to PDF</h1>
+    <p>This is some content that you can export as a PDF.</p>
+    <button id="exportPdfButton">Export as PDF</button>
+
+
+
+
+    <!-- Splash screen -->
+    <div id="splash-screen-pdf">در حال تبدیل به PDF...</div>
+
+    <!-- Button to export as PDF -->
+    <button id="export-pdf">
+        دانلود PDF
+    </button>
+
+
+    <div class="container">
+
+        <img id="training-image" src="https://raw.githubusercontent.com/rezajax/note/refs/heads/main/logoname2.svg"
+             alt="Training Image">
+        <h1>برنامه تمرینی</h1>
+        <h2>مربی: <span id="coach-name"></span></h2>
+
+        <div class="info">
+
+            <p><strong>نام ورزشکار:</strong> <span id="athlete-name"></span></p>
+            <p><strong>تاریخ شروع:</strong> <span id="start-date"></span></p>
+            <p><strong>تاریخ پایان:</strong> <span id="end-date"></span></p>
+            <p><strong>شماره مربی:</strong> <span id="coach-phone"></span></p>
+        </div>
+
+        <h3>نکات و دستور‌العمل‌ها</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>شماره</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="tips-table">
+            <!-- داده‌ها از گوگل شیت وارد می‌شود -->
+            </tbody>
+        </table>
+
+        <h3>برنامه تمرینی روز اول</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day1-table">
+            <!-- داده‌ها از گوگل شیت وارد می‌شود -->
+            </tbody>
+        </table>
+
+        <h3>برنامه تمرینی روز دوم</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day2-table">
+            <!-- داده‌ها از گوگل شیت وارد می‌شود -->
+            </tbody>
+        </table>
+
+        <h3>برنامه تمرینی روز سوم</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day3-table">
+            <!-- داده‌ها از گوگل شیت وارد می‌شود -->
+            </tbody>
+        </table>
+
+        <h3>نکات مهم</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>شماره</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="important-notes-table">
+            <!-- داده‌ها از گوگل شیت وارد می‌شود -->
+            </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+<div class="fab" onclick="scrollToTop()">↑</div>
+
+<script>
+
+
+    document.getElementById('exportPdfButton').addEventListener('click', function() {
+        // Select the content from the container-wrapper
+        const content = document.querySelector('.container-wrapper');
+
+        // Use html2canvas to capture the content as an image
+        html2canvas(content).then(function(canvas) {
+            // Convert the canvas to an image
+            const imgData = canvas.toDataURL('image/png');
+
+            // Create a new jsPDF instance
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Add the image to the PDF (you can adjust the image size and position here)
+            doc.addImage(imgData, 'PNG', 10, 10, canvas.width * 0.5, canvas.height * 0.5); // Adjust size here
+
+            // Save the generated PDF
+            doc.save('exported-content.pdf');
+        });
+    });
+    // // Wait for 10 seconds before showing the main content
+    // setTimeout(function() {
+    //   // Hide splash screen and show main content
+    //   document.getElementById('splash').style.display = 'none';
+    //   document.getElementById('mainContent').style.display = 'block';
+    // }, 10000);  // 10000 ms = 10 seconds
+
+
+    // Lazy loading - Show splash screen
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("splash-screen").style.display = "flex";
+        document.getElementById("main-content").style.display = "none";
+    });
+
+
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // document.getElementById('export-pdf').addEventListener('click', function () {
+    //   // Show splash screen while export is happening
+    //   document.getElementById('splash-screen-pdf').style.display = 'flex';
+
+    //   // Trigger export after a delay
+    //   setTimeout(function () {
+    //     google.script.run
+    //       .withSuccessHandler(function (pdfUrl) {
+    //         // Hide splash screen after export is complete
+    //         document.getElementById('splash-screen-pdf').style.display = 'none';
+
+    //         // Open the URL to download the PDF
+    //         window.open(pdfUrl, '_blank');
+    //       })
+    //       .exportToPDF(); // Call Apps Script function to generate PDF
+    //   }, 5000); // Delay of 500ms (adjust as needed)
+    // });
+
+
+    //vg changed
+    document.getElementById('export-pdf').addEventListener('click', function () {
+
+        var doc = document.getElementsByClassName("container");
+        window.print()
+    });
+
+
+
+    // واکشی داده‌ها از Google Apps Script
+    google.script.run.withSuccessHandler(function (data) {
+        alert(JSON.stringify(data, null, 2)); // نمایش داده‌ها با قالب بهتر
+        document.getElementById('coach-name').innerText = data.generalInfo[0];
+        document.getElementById('athlete-name').innerText = data.generalInfo[1];
+        document.getElementById('start-date').innerText = data.generalInfo[2];
+        document.getElementById('end-date').innerText = data.generalInfo[3];
+        document.getElementById('coach-phone').innerText = data.generalInfo[4];
+
+        const tipsTable = document.getElementById('tips-table');
+        data.tips.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+            tipsTable.appendChild(tr);
+        });
+
+        const day1Table = document.getElementById('day1-table');
+        data.day1.forEach((row, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${index + 1}</td><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+            day1Table.appendChild(tr);
+        });
+
+        const day2Table = document.getElementById('day2-table');
+        data.day2.forEach((row, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${index + 1}</td><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+            day2Table.appendChild(tr);
+        });
+
+        const day3Table = document.getElementById('day3-table');
+        data.day3.forEach((row, index) => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${index + 1}</td><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td>`;
+            day3Table.appendChild(tr);
+        });
+
+        const importantNotesTable = document.getElementById('important-notes-table');
+        data.importantNotes.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+            importantNotesTable.appendChild(tr);
+        });
+
+        // Hide splash screen and show content
+        document.getElementById("splash-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+    }).getTrainingPlan();
+
+</script>
+</body>
+
+</html>
