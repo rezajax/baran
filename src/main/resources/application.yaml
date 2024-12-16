@@ -1,0 +1,6 @@
+ktor:
+  application:
+    modules:
+      - baranfit.ir.ApplicationKt.module
+  deployment:
+    port: 8080
