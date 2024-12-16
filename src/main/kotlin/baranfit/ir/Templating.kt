@@ -3,7 +3,6 @@ package baranfit.ir
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
-import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.thymeleaf.Thymeleaf
@@ -13,9 +12,17 @@ import kotlinx.html.*
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver
 
 fun Application.configureTemplating() {
-
+    install(Thymeleaf) {
+        setTemplateResolver(ClassLoaderTemplateResolver().apply {
+            prefix = "templates/thymeleaf/"
+            suffix = ".html"
+            characterEncoding = "utf-8"
+        })
+    }
     routing {
-
+        get("/html-thymeleaf") {
+            call.respond(ThymeleafContent("index", mapOf("user" to ThymeleafUser(1, "user1"))))
+        }
         get("/html-dsl") {
             call.respondHtml {
                 body {
