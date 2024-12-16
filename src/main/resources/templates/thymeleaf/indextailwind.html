@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامه تمرینی</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Override for font */
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            direction: rtl;
+        }
+
+        /* Custom styles for the splash screen and floating button */
+        #splash-screen, #splash-screen-pdf {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 24px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #C61C1E;
+            color: #ffffff;
+            font-size: 1.5rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Splash Screen -->
+<div id="splash-screen" class="d-flex">
+    <div class="loading-spinner border-5 border-top-5 rounded-circle border-light" style="width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
+    <p class="mt-3">در حال بارگذاری...</p>
+</div>
+
+<!-- Wrapper Container -->
+<div class="container py-4">
+    <!-- Splash screen for PDF -->
+    <div id="splash-screen-pdf" class="d-flex justify-content-center align-items-center">در حال تبدیل به PDF...</div>
+
+    <!-- Button to export as PDF -->
+    <button id="export-pdf" class="btn btn-danger mb-4">دانلود PDF</button>
+
+    <div class="bg-white shadow rounded p-4">
+
+        <img id="training-image" src="https://raw.githubusercontent.com/rezajax/note/refs/heads/main/logoname2.svg" alt="Training Image" class="img-fluid mb-4" style="max-width: 200px;">
+
+        <h1 class="text-center text-danger mb-3">برنامه تمرینی</h1>
+        <h2 class="text-center mb-4">مربی: <span id="coach-name"></span></h2>
+
+        <div class="bg-light p-3 rounded mb-4">
+            <p><strong>نام ورزشکار:</strong> <span id="athlete-name"></span></p>
+            <p><strong>تاریخ شروع:</strong> <span id="start-date"></span></p>
+            <p><strong>تاریخ پایان:</strong> <span id="end-date"></span></p>
+            <p><strong>شماره مربی:</strong> <span id="coach-phone"></span></p>
+        </div>
+
+        <h3 class="text-danger mb-3">نکات و دستور‌العمل‌ها</h3>
+        <table class="table table-bordered mb-4">
+            <thead>
+            <tr class="table-danger">
+                <th>شماره</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="tips-table">
+            <!-- Data populated by script -->
+            </tbody>
+        </table>
+
+        <h3 class="text-danger mb-3">برنامه تمرینی روز اول</h3>
+        <table class="table table-bordered mb-4">
+            <thead>
+            <tr class="table-danger">
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day1-table">
+            <!-- Data populated by script -->
+            </tbody>
+        </table>
+
+        <h3 class="text-danger mb-3">برنامه تمرینی روز دوم</h3>
+        <table class="table table-bordered mb-4">
+            <thead>
+            <tr class="table-danger">
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day2-table">
+            <!-- Data populated by script -->
+            </tbody>
+        </table>
+
+        <h3 class="text-danger mb-3">برنامه تمرینی روز سوم</h3>
+        <table class="table table-bordered mb-4">
+            <thead>
+            <tr class="table-danger">
+                <th>شماره</th>
+                <th>حرکات تمرینی</th>
+                <th>تعداد ست</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="day3-table">
+            <!-- Data populated by script -->
+            </tbody>
+        </table>
+
+        <h3 class="text-danger mb-3">نکات مهم</h3>
+        <table class="table table-bordered mb-4">
+            <thead>
+            <tr class="table-danger">
+                <th>شماره</th>
+                <th>توضیحات</th>
+            </tr>
+            </thead>
+            <tbody id="important-notes-table">
+            <!-- Data populated by script -->
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<div class="fab" onclick="scrollToTop()">↑</div>
+
+<!-- Bootstrap and Custom JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Show splash screen and hide main content initially
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("splash-screen").style.display = "flex";
+        document.getElementById("main-content").style.display = "none";
+    });
+
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Export as PDF
+    document.getElementById('export-pdf').addEventListener('click', function () {
+        window.print();
+    });
+
+    // Populate tables from data (example)
+    google.script.run.withSuccessHandler(function (data) {
+        document.getElementById('coach-name').innerText = data.generalInfo[0];
+        document.getElementById('athlete-name').innerText = data.generalInfo[1];
+        document.getElementById('start-date').innerText = data.generalInfo[2];
+        document.getElementById('end-date').innerText = data.generalInfo[3];
+        document.getElementById('coach-phone').innerText = data.generalInfo[4];
+
+        // Example of populating tables with data
+        const tipsTable = document.getElementById('tips-table');
+        data.tips.forEach(row => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+            tipsTable.appendChild(tr);
+        });
+
+        // Repeat for other tables...
+
+        document.getElementById("splash-screen").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+    }).getTrainingPlan();
+</script>
+</body>
+
+</html>

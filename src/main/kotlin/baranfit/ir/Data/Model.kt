@@ -23,8 +23,16 @@ data class WorkoutPlan(
             val number: Int,
             val name: String,
             val sets: String,
-            val notes: String? = null
-        )
+            val notes: String = " ",
+            val title: titles = titles("شماره" , "حرکات تمرینی" , "تعداد ست", "توضیحات")
+        ) {
+            data class titles (
+                val number: String,
+                val name : String,
+                val sets: String,
+                val notes: String
+            )
+        }
     }
 
     data class Note(
