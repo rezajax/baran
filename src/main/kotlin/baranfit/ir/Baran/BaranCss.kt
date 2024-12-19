@@ -1,115 +1,12 @@
-package baranfit.ir
+package baranfit.ir.Baran
 
-import baranfit.ir.Data.workoutPlan
-import io.ktor.http.*
+import baranfit.ir.tmp.respondCss
 import io.ktor.server.application.*
-import io.ktor.server.html.*
-import io.ktor.server.plugins.statuspages.*
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlinx.css.*
-import kotlinx.html.*
 
-fun Application.baranApp() {
-    install(StatusPages) {
-        exception<Throwable> { call, cause ->
-            call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
-        }
-    }
+fun Application.baranAppCss() {
     routing {
-        get("/") {
-            call.respondHtml {
-                baranHead()
-
-                body {
-                    div(classes = "container-wrapper") {
-                        div(classes = "container") {
-//                            img(classes = "training-image") {
-//                                src = "https://raw.githubusercontent.com/rezajax/note/refs/heads/main/logoname2.svg"
-//                                alt = "Training Image"
-//                            }
-                            h1 {
-                                +"برنامه تمرینی"
-                            }
-                            h2 {
-                                +"مربی: "
-                                span(classes = "coach-name") { +workoutPlan.coachName }
-                            }
-
-                            div(classes = "info") {
-                                p {
-                                    strong { +"نام ورزشکار:" }
-                                    span(classes = "athlete-name") { +"اسم ورزشکار" }
-                                }
-                                p {
-                                    strong { +"تاریخ شروع:" }
-                                    span(classes = "start-date") { +"تاریخ شروع" }
-                                }
-                                p {
-                                    strong { +"تاریخ پایان:" }
-                                    span(classes = "end-date") { +"تاریخ پایان" }
-                                }
-                                p {
-                                    strong { +"شماره مربی:" }
-                                    span(classes = "coach-phone") { +"شماره مربی" }
-                                }
-                            }
-
-                            workoutPlan.dailyWorkouts.forEachIndexed { index, dailyWorkout ->
-                                h3 { +dailyWorkout.day }
-
-                                table {
-                                    thead {
-                                        tr {
-                                            td { +dailyWorkout.exercises[index].title.number }
-                                            td { +dailyWorkout.exercises[index].title.name }
-                                            td { +dailyWorkout.exercises[index].title.sets }
-                                            td { +dailyWorkout.exercises[index].title.notes }
-                                        }
-                                    }
-                                    dailyWorkout.exercises.forEachIndexed { index, exercise ->
-                                        tr {
-                                            td { +(index + 1).toString() }
-                                            td { +exercise.name }
-                                            td { +exercise.sets }
-                                            td { +exercise.notes }
-
-
-                                        }
-
-                                    }
-                                }
-
-
-                            }
-
-
-                            h3 { +"نکات و دستور‌العمل‌ها" }
-                            table {
-                                thead {
-                                    tr {
-                                        th { +"شماره" }
-                                        th { +"توضیحات" }
-                                    }
-                                }
-                                tbody {
-                                    tr {
-                                        td { +"1" }
-                                        td { +"توضیحات 1" }
-                                    }
-                                }
-                            }
-
-
-                            // Repeat similar table structure for other days (day1, day2, etc.)
-                        }
-                    }
-                }
-            }
-
-        }
-
-
         get("/baran.css") {
             call.respondCss {
 /*                rule(":root") {
@@ -244,18 +141,18 @@ fun Application.baranApp() {
                 }
 
                 // Responsive Design
-/*                media(maxWidth = 768.px) {
-                    h1 {
-                        fontSize = 1.5.rem
-                    }
-                    h2 {
-                        fontSize = 1.2.rem
-                    }
-                    th, td {
-                    fontSize = 0.8.rem
-                    padding = "6px"
-                }
-                }*/
+                /*                media(maxWidth = 768.px) {
+                                    h1 {
+                                        fontSize = 1.5.rem
+                                    }
+                                    h2 {
+                                        fontSize = 1.2.rem
+                                    }
+                                    th, td {
+                                    fontSize = 0.8.rem
+                                    padding = "6px"
+                                }
+                                }*/
 
                 // Splash screen styles
                 "#splash-screen-pdf" {
@@ -323,21 +220,5 @@ fun Application.baranApp() {
                 }
             }
         }
-    }
-
-
-}
-
-
-private fun HTML.baranHead() {
-    head {
-        meta(charset = "UTF-8")
-        meta(name = "viewport", content = "width=device-width, initial-scale=1.0")
-        title("برنامه تمرینی")
-        link(
-            href = "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap",
-            rel = "stylesheet"
-        )
-        styleLink("/baran.css")  // If you want to externalize the styles
     }
 }

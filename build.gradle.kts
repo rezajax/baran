@@ -35,4 +35,11 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml-jvm")
     testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+//    implementation("org.xhtmlrenderer:flying-saucer-core:9.1.22")
+//    implementation("org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.22")
+
+    // https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-pdfbox
+    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
+
 }
