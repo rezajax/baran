@@ -2,6 +2,8 @@ name: Publish JAR to GitHub Releases
 
 on:
   push:
+    tags:
+      - 'v*'  # به محض اینکه یک تگ جدید ایجاد شود (مثلاً v1.0.0)، این workflow اجرا می‌شود.
 
   workflow_dispatch:
 
