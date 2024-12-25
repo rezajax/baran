@@ -31,7 +31,6 @@ fun Application.baranApp2() {
 }
 
 
-
 private fun HTML.baranHead2() {
     head {
         meta(charset = "UTF-8")
@@ -74,27 +73,28 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
     }
 
 
-    trainingProgram.notes.forEachIndexed() { index, note ->
+    h3 { +trainingProgram.notesTitle }
 
-        table {
-            if (index == 0) {
-                thead {
-                    tr {
-                        th { +note.number }
-                        th { +note.description }
-                    }
-                }
-            } else {
-                tbody {
-                    tr {
-                        td { +note.number }
-                        td { +note.description }
-                    }
+    table {
+        thead {
+            tr {
+                th { +trainingProgram.notes[0].number }
+                th { +trainingProgram.notes[0].description }
+            }
+        }
+        tbody {
+            trainingProgram.notes.forEachIndexed() { index, note ->
+                if (index == 0) return@forEachIndexed // Skip the first note
+                tr {
+                    td { +note.number }
+                    td { +note.description }
                 }
             }
 
         }
     }
+
+
 
     trainingProgram.days.forEachIndexed() { index, day ->
         h3 { +day.title }
@@ -108,7 +108,7 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
                             th { +exercise.sets }
                             val l = exercise.notes?.length ?: 0
 
-                            td { +l}
+                            td { +l }
                         }
                     }
                 } else {
@@ -119,7 +119,7 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
                             td { +exercise.sets }
                             val l = exercise.notes?.length ?: 0
 
-                            td { +l}
+                            td { +l }
                         }
                     }
                 }
