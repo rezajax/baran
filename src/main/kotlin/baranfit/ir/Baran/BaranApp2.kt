@@ -58,20 +58,20 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
 
     div(classes = "info") {
         p {
-            strong { +"نام ورزشکار:" }
+            strong { +"نام ورزشکار: " }
             span(classes = "athlete-name") { +trainingProgram.trainerName }
         }
         p {
-            strong { +"تاریخ شروع:" }
+            strong { +"تاریخ شروع: " }
             span(classes = "start-date") { +trainingProgram.startDate }
         }
         p {
-            strong { +"تاریخ پایان:" }
+            strong { +"تاریخ پایان: " }
             span(classes = "end-date") { +trainingProgram.endDate }
         }
         p {
-            strong { +"شماره مربی:" }
-            span(classes = "coach-phone") { trainingProgram.athletePhone }
+            strong { +"شماره مربی: " }
+            span(classes = "coach-phone") { +trainingProgram.athletePhone }
         }
     }
 
