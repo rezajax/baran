@@ -1,0 +1,28 @@
+name: Publish JAR to GitHub Releases
+
+on:
+  push:
+
+  workflow_dispatch:
+
+jobs:
+  releaase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: CHeck out repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21 temurin
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar  # فایل JAR که می‌خواهید منتشر کنید

@@ -89,7 +89,7 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
             trainingProgram.notes.forEachIndexed { index, note ->
                 if (index == 0) return@forEachIndexed // Skip the first note
                 tr {
-                    td { +"${note.number}" }
+                    td { +note.number }
                     td {
                         input(type = InputType.text) {
                             value = note.description
