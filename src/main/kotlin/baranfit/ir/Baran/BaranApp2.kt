@@ -1,3 +1,5 @@
+@file:Suppress("LABEL_NAME_CLASH")
+
 package baranfit.ir.Baran
 
 import baranfit.ir.data.WorkoutPlan
@@ -8,6 +10,7 @@ import io.ktor.server.html.*
 import io.ktor.server.routing.*
 import kotlinx.css.thead
 import kotlinx.html.*
+
 
 
 fun Application.baranApp2() {
@@ -73,8 +76,8 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
     }
 
 
+    // header notes
     h3 { +trainingProgram.notesTitle }
-
     table {
         thead {
             tr {
@@ -96,73 +99,51 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
 
 
 
-    trainingProgram.days.forEachIndexed() { index, day ->
+    trainingProgram.days.forEachIndexed { index, day ->
         h3 { +day.title }
         table {
-            day.exercises.forEachIndexed() { index, exercise ->
-                if (index == 0) {
-                    thead {
+            thead {
+                day.exercises.forEachIndexed() { i, exercise ->
+                    if (i == 0) {
                         tr {
                             th { +exercise.number }
                             th { +exercise.exerciseName }
                             th { +exercise.sets }
-                            val l = exercise.notes?.length ?: 0
-
-                            td { +l }
+                            th { +(exercise.notes ?: "توضیحات") }
                         }
                     }
-                } else {
-                    tbody {
-                        tr {
-                            td { +exercise.number }
-                            td { +exercise.exerciseName }
-                            td { +exercise.sets }
-                            val l = exercise.notes?.length ?: 0
 
-                            td { +l }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    workoutPlan.dailyWorkouts.forEachIndexed { index, dailyWorkout ->
-        h3 { +dailyWorkout.day }
-        table {
-            thead {
-                tr {
-                    th { +"شماره" }
-                    th { +"تمرین" }
-                    th { +"تعداد ست‌ها" }
-                    th { +"یادداشت‌ها" }
                 }
             }
             tbody {
-                dailyWorkout.exercises.forEachIndexed { exerciseIndex, exercise ->
+                day.exercises.forEachIndexed { index, exercise ->
+                    if (index == 0) return@forEachIndexed // Skip the first exercise
                     tr {
-                        td { +(exerciseIndex + 1).toString() }
-                        td { +exercise.name }
+                        td { +exercise.number }
+                        td { +exercise.exerciseName }
                         td { +exercise.sets }
-                        td { +exercise.notes }
+                        td { +(exercise.notes ?: "") }
                     }
                 }
             }
         }
     }
 
-    h3 { +"نکات و دستور‌العمل‌ها" }
+    h3 { +trainingProgram.importantNotesTitle }
     table {
         thead {
             tr {
-                th { +"شماره" }
-                th { +"توضیحات" }
+                th { +trainingProgram.importantNotes[0].number }
+                th { +trainingProgram.importantNotes[0].description }
             }
         }
         tbody {
-            tr {
-                td { +"1" }
-                td { +"توضیحات 1" }
+            trainingProgram.importantNotes.forEachIndexed() { index, note ->
+                if (index == 0) return@forEachIndexed // Skip the first note
+                tr {
+                    td { +note.number }
+                    td { +note.description }
+                }
             }
         }
     }

@@ -64,6 +64,7 @@ val trainingProgram = TrainingProgram(
             title = "روز اول",
             exercises = listOf(
                 Exercise("شماره", "حرکات تمرینی", "تعداد ست", "توضیحات"),
+
                 Exercise("1", "جلو ران", "2x12-2x10-10/10", "ست اخر دامنه دار"),
                 Exercise("2", "اسکات اسمیت", "15-12-12-10", null),
                 Exercise("3", "پرس پا", "3x15", null),
@@ -74,6 +75,8 @@ val trainingProgram = TrainingProgram(
         Day(
             title = "روز دوم",
             exercises = listOf(
+                Exercise("شماره", "حرکات تمرینی", "تعداد ست", "توضیحات"),
+
                 Exercise("1", "زیر بغل بارفیکس دست باز", "3x12", null),
                 Exercise("2", "لت دست جمع + استرالیایی", "3x15/12", null),
                 Exercise("3", "اره ای دمبل دامنه دار", "3x12/12", null),
@@ -85,6 +88,8 @@ val trainingProgram = TrainingProgram(
         Day(
             title = "روز سوم",
             exercises = listOf(
+                Exercise("شماره", "حرکات تمرینی", "تعداد ست", "توضیحات"),
+
                 Exercise("1", "پشت پا خوابیده", "4x15", "هرست سنگین"),
                 Exercise("2", "هیپ تراست هالتر", "4x10", "هر ست سنگین"),
                 Exercise("3", "کیک بک باسن کراس", "3x13", null),
