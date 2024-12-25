@@ -1,4 +1,4 @@
-package baranfit.ir.Data
+package baranfit.ir.data
 
 data class WorkoutPlan(
     val coachName: String,

@@ -1,6 +1,7 @@
 package baranfit.ir
 
 import baranfit.ir.Baran.baranApp
+import baranfit.ir.Baran.baranApp2
 import baranfit.ir.Baran.baranAppCss
 import baranfit.ir.tmp.configureRouting
 import baranfit.ir.tmp.configureTemplating
@@ -14,6 +15,8 @@ fun Application.module() {
     configureTemplating()
     configureRouting()
     baranApp()
+    baranApp2()
+
     baranAppCss()
 
 }

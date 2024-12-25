@@ -1,15 +1,13 @@
 package baranfit.ir.Baran
 
-import baranfit.ir.Data.WorkoutPlan
-import baranfit.ir.Data.workoutPlan
-import baranfit.ir.tmp.respondCss
+import baranfit.ir.data.WorkoutPlan
+import baranfit.ir.data.workoutPlan
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.css.*
 import kotlinx.html.*
 import kotlinx.html.stream.appendHTML
 import java.io.ByteArrayOutputStream
@@ -97,7 +95,7 @@ private fun HTML.baranHead() {
             href = "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap",
             rel = "stylesheet"
         )
-//        styleLink("/baran.css")  // If you want to externalize the styles
+        styleLink("/baran.css")  // If you want to externalize the styles
     }
 }
 
