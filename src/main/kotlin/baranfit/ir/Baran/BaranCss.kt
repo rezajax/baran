@@ -1,7 +1,6 @@
 package baranfit.ir.Baran
 
 import baranfit.ir.tmp.respondCss
-import com.openhtmltopdf.css.parser.property.PrimitiveBackgroundPropertyBuilders.BackgroundColor
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import kotlinx.css.*
