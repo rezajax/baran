@@ -16,7 +16,7 @@ import kotlinx.html.*
 fun Application.baranApp2() {
 
     routing {
-        get("/2") {
+        get("/") {
             call.respondHtml {
                 baranHead2()
                 body {
