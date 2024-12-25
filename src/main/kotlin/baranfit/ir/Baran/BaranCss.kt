@@ -1,9 +1,11 @@
 package baranfit.ir.Baran
 
 import baranfit.ir.tmp.respondCss
+import com.openhtmltopdf.css.parser.property.PrimitiveBackgroundPropertyBuilders.BackgroundColor
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import kotlinx.css.*
+import kotlinx.css.properties.LineHeight
 
 fun Application.baranAppCss() {
     routing {
@@ -95,7 +97,7 @@ fun Application.baranAppCss() {
                     marginTop = 16.px
                     marginBottom = 16.px
                     borderRadius = 8.px
-//                    overflow = "hidden"
+                    overflow = Overflow.hidden
                 }
 
 //                table, "th", "td" {
@@ -113,6 +115,18 @@ fun Application.baranAppCss() {
                     fontSize = 0.9.rem
                     padding = "8px"
                     textAlign = TextAlign.center
+                }
+
+                input {
+                    fontSize = 0.9.rem
+//                    padding = "10px 8px" // کمی فاصله بیشتر در بالا و پایین
+                    textAlign = TextAlign.center
+                    width = 100.pct
+                    border = "none"
+                    outline = Outline.none
+                    backgroundColor = Color.transparent
+                    lineHeight = LineHeight("1.5")
+                    boxSizing = BoxSizing.borderBox // اطمینان از اینکه padding در عرض و ارتفاع گنجانده شده
                 }
 
                 "tbody tr:nth-child(odd)" {

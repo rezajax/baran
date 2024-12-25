@@ -16,7 +16,7 @@ import kotlinx.html.*
 fun Application.baranApp2() {
 
     routing {
-        get("/") {
+        get("/2") {
             call.respondHtml {
                 baranHead2()
                 body {
@@ -86,14 +86,19 @@ fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
             }
         }
         tbody {
-            trainingProgram.notes.forEachIndexed() { index, note ->
+            trainingProgram.notes.forEachIndexed { index, note ->
                 if (index == 0) return@forEachIndexed // Skip the first note
                 tr {
-                    td { +note.number }
-                    td { +note.description }
+                    td { +"${note.number}" }
+                    td {
+                        input(type = InputType.text) {
+                            value = note.description
+                            style = "border: none; outline: none;" // Remove the border and outline
+                        }
+                    }
+//                    td { +note.description }
                 }
             }
-
         }
     }
 
