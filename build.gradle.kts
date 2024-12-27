@@ -23,25 +23,24 @@ repositories {
 }
 
 dependencies {
-    implementation("io.ktor:ktor-server-core-jvm")
-    implementation("io.ktor:ktor-server-thymeleaf-jvm")
-    implementation("io.ktor:ktor-server-html-builder-jvm")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinx_html_version")
-    implementation("org.jetbrains:kotlin-css-jvm:1.0.0-pre.129-kotlin-1.4.20")
-    implementation("io.ktor:ktor-server-host-common-jvm")
-    implementation("io.ktor:ktor-server-status-pages-jvm")
-    implementation("io.ktor:ktor-server-netty-jvm")
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-config-yaml-jvm")
-    testImplementation("io.ktor:ktor-server-test-host-jvm")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation(libs.ktor.server.core.jvm)
+    implementation(libs.ktor.server.thymeleaf.jvm)
+    implementation(libs.ktor.server.html.builder.jvm)
+    implementation(libs.kotlinx.html.jvm)
+    implementation(libs.kotlin.css.jvm)
+    implementation(libs.ktor.server.host.common.jvm)
+    implementation(libs.ktor.server.status.pages.jvm)
+    implementation(libs.ktor.server.netty.jvm)
+    implementation(libs.logback.classic)
+    implementation(libs.ktor.server.config.yaml.jvm)
+    testImplementation(libs.ktor.server.test.host.jvm)
+    testImplementation(libs.kotlin.test.junit)
 
-//    implementation("org.xhtmlrenderer:flying-saucer-core:9.1.22")
-//    implementation("org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.22")
+    // Uncomment if needed
+    // implementation(libs.flying.saucer.core)
+    // implementation(libs.flying.saucer.pdf.openpdf)
 
-    // https://mvnrepository.com/artifact/com.openhtmltopdf/openhtmltopdf-pdfbox
-    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:1.0.10")
-
+    implementation(libs.openhtmltopdf.pdfbox)
 }
 
 

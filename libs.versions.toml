@@ -1,0 +1,31 @@
+[versions]
+kotlin_version = "2.1.0"
+kotlinx_html_version = "0.11.0"
+ktor_version = "3.0.2"
+logback_version = "1.5.15"
+openhtmltopdf_pdfbox_version = "1.0.10"
+
+[libraries]
+ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor_version" }
+ktor-server-thymeleaf-jvm = { module = "io.ktor:ktor-server-thymeleaf-jvm", version.ref = "ktor_version" }
+ktor-server-html-builder-jvm = { module = "io.ktor:ktor-server-html-builder-jvm", version.ref = "ktor_version" }
+kotlinx-html-jvm = { module = "org.jetbrains.kotlinx:kotlinx-html-jvm", version.ref = "kotlinx_html_version" }
+kotlin-css-jvm = { module = "org.jetbrains:kotlin-css-jvm", version = "1.0.0-pre.129-kotlin-1.4.20" }
+ktor-server-host-common-jvm = { module = "io.ktor:ktor-server-host-common-jvm", version.ref = "ktor_version" }
+ktor-server-status-pages-jvm = { module = "io.ktor:ktor-server-status-pages-jvm", version.ref = "ktor_version" }
+ktor-server-netty-jvm = { module = "io.ktor:ktor-server-netty-jvm", version.ref = "ktor_version" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback_version" }
+ktor-server-config-yaml-jvm = { module = "io.ktor:ktor-server-config-yaml-jvm", version.ref = "ktor_version" }
+ktor-server-test-host-jvm = { module = "io.ktor:ktor-server-test-host-jvm", version.ref = "ktor_version" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin_version" }
+
+# Uncomment if needed
+# flying-saucer-core = { module = "org.xhtmlrenderer:flying-saucer-core", version = "9.1.22" }
+# flying-saucer-pdf-openpdf = { module = "org.xhtmlrenderer:flying-saucer-pdf-openpdf", version = "9.1.22" }
+
+openhtmltopdf-pdfbox = { module = "com.openhtmltopdf:openhtmltopdf-pdfbox", version.ref = "openhtmltopdf_pdfbox_version" }
+
+
+
+
+
