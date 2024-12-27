@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+
 
 jobs:
   build:
@@ -66,4 +68,4 @@ jobs:
 
       - name: save release info
         run: |
-          echo "release is done: ${{ steps.generate_tag.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
+          cowsay "release is done: ${{ steps.generate_tag.outputs.tag }}" >> $GITHUB_STEP_SUMMARY
