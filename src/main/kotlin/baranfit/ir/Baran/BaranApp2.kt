@@ -2,9 +2,7 @@
 
 package baranfit.ir.Baran
 
-import baranfit.ir.data.WorkoutPlan
 import baranfit.ir.data.trainingProgram
-import baranfit.ir.data.workoutPlan
 import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.routing.*
@@ -25,7 +23,7 @@ fun Application.baranApp2() {
                 body {
                     div(classes = "container-wrapper") {
                         div(classes = "container") {
-                            workoutContent2(workoutPlan)
+                            workoutContent2()
                         }
                     }
                 }
@@ -51,9 +49,9 @@ private fun HTML.baranHead2() {
 }
 
 
-
+//fun DIV.workoutContent2( workoutPlan: WorkoutPlan) {
 // Generates the content of the workout plan
-fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
+fun DIV.workoutContent2() {
     h1 { +trainingProgram.title }
     h2 {
         +"مربی: "
