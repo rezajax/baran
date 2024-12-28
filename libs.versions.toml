@@ -4,6 +4,8 @@ kotlinx_html_version = "0.11.0"
 ktor_version = "3.0.2"
 logback_version = "1.5.15"
 openhtmltopdf_pdfbox_version = "1.0.10"
+h2-database = "2.2.224"
+exposed = "0.57.0"
 
 [libraries]
 ktor-server-core-jvm = { module = "io.ktor:ktor-server-core-jvm", version.ref = "ktor_version" }
@@ -25,7 +27,7 @@ kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version
 
 openhtmltopdf-pdfbox = { module = "com.openhtmltopdf:openhtmltopdf-pdfbox", version.ref = "openhtmltopdf_pdfbox_version" }
 
+h2 = { module = "com.h2database:h2", version.ref = "h2-database" }
 
-
-
-
+exposed-core = { module = "org.jetbrains.exposed:exposed-core", version.ref = "exposed" }
+exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc", version.ref = "exposed" }

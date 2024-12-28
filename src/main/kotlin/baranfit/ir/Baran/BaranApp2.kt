@@ -9,10 +9,14 @@ import io.ktor.server.application.*
 import io.ktor.server.html.*
 import io.ktor.server.routing.*
 import kotlinx.html.*
+import baranfit.ir.db.*
 
 
 
 fun Application.baranApp2() {
+    initDb()
+
+    insertTrainingProgram(trainingProgram)
 
     routing {
         get("/2") {
@@ -47,7 +51,7 @@ private fun HTML.baranHead2() {
 }
 
 
-@Suppress("unused")
+
 // Generates the content of the workout plan
 fun DIV.workoutContent2(workoutPlan: WorkoutPlan) {
     h1 { +trainingProgram.title }

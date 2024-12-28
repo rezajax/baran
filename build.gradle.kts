@@ -41,6 +41,12 @@ dependencies {
     // implementation(libs.flying.saucer.pdf.openpdf)
 
     implementation(libs.openhtmltopdf.pdfbox)
+
+    implementation(libs.h2)
+
+    implementation(libs.exposed.core)
+    implementation(libs.exposed.jdbc)
+
 }
 
 
