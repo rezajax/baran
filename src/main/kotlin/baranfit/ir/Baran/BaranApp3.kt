@@ -31,7 +31,8 @@ fun Application.baranApp3() {
                 baranHead3()
                 body {
                     transaction {
-                        ul {
+
+                        ul (classes = "scrolled") {
                             TrainingPrograms.selectAll().forEach { row ->
                                 val athleteName = row[TrainingPrograms.athleteName].toString()
                                 li { +athleteName }

@@ -22,6 +22,12 @@ fun Application.baranAppCss() {
                     property("--divider-color", "#E0E0E0")
                 }*/
 
+
+                ".scrolled" {
+                    maxHeight = 200.px
+                    overflowY = Overflow.auto
+                }
+
                 // Global Styles
                 body {
                     fontFamily = "'Vazirmatn', sans-serif"
