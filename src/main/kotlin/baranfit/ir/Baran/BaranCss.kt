@@ -115,10 +115,8 @@ fun Application.baranAppCss() {
                     padding = "8px"
                     textAlign = TextAlign.center
                 }
-
                 input {
                     fontSize = 0.9.rem
-//                    padding = "10px 8px" // کمی فاصله بیشتر در بالا و پایین
                     textAlign = TextAlign.center
                     width = 100.pct
                     border = "none"
@@ -126,7 +124,19 @@ fun Application.baranAppCss() {
                     backgroundColor = Color.transparent
                     lineHeight = LineHeight("1.5")
                     boxSizing = BoxSizing.borderBox // اطمینان از اینکه padding در عرض و ارتفاع گنجانده شده
+                    whiteSpace = WhiteSpace.normal // اجازه می‌دهد متن در چند خط نمایش داده شود
+                    overflow = Overflow.hidden // از خروج متن از کادر جلوگیری می‌کند
+                    wordWrap = WordWrap.breakWord // متن را در صورت نیاز به خط بعدی منتقل می‌کند
                 }
+
+/*
+                media("screen and (max-width: 768px)") {
+                    input {
+                        fontSize = 0.8.rem // کاهش سایز فونت برای صفحات کوچک‌تر
+                        padding = "8px"
+                    }
+                }
+*/
 
                 "tbody tr:nth-child(odd)" {
                     backgroundColor = Color("#F5F5F5")
