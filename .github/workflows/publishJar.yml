@@ -30,14 +30,6 @@ jobs:
           name: app-jar
           path: build/libs/baran-all.jar # مسیر دقیق فایل JAR
 
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Deploy JAR to Server
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
@@ -47,6 +39,16 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh -o StrictHostKeyChecking=no root@107.175.73.102 "mkdir -p /root/deploy"
           scp -o StrictHostKeyChecking=no build/libs/baran-all.jar root@107.175.73.102:/root/deploy/
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+
 
       - name: Download JAR artifact
         uses: actions/download-artifact@v4
