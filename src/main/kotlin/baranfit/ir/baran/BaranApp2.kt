@@ -1,6 +1,6 @@
 @file:Suppress("LABEL_NAME_CLASH")
 
-package baranfit.ir.Baran
+package baranfit.ir.baran
 
 import baranfit.ir.data.trainingProgram
 import io.ktor.server.application.*
@@ -12,7 +12,7 @@ import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 
-fun Application.baranApp3() {
+fun Application.baranApp2() {
     initDb()
 
     insertTrainingProgram(trainingProgram)
@@ -20,47 +20,33 @@ fun Application.baranApp3() {
 
 
     routing {
-        get("/3") {
-            val scriptContent = """
-            function hi(athleteName) {
-                alert("Transaction athleteName: " + athleteName);
-            }
-        """.trimIndent()
-
+        get("/2") {
             call.respondHtml {
-                baranHead3()
+                baranHead2()
                 body {
-                    transaction {
 
-                        ul (classes = "scrolled") {
+                    transaction {
+                        ul {
                             TrainingPrograms.selectAll().forEach { row ->
-                                val athleteName = row[TrainingPrograms.athleteName].toString()
-                                li { +athleteName }
-                                button {
-                                    onClick = "hi('$athleteName')"
-                                    +athleteName // Display the athlete name on the button
-                                }
+                                li { +row[TrainingPrograms.athleteName].toString() }
                             }
                         }
                     }
                     div(classes = "container-wrapper") {
                         div(classes = "container") {
-                            workoutContent3()
-                        }
-                    }
-                    script {
-                        unsafe {
-                            +scriptContent
+                            workoutContent2()
                         }
                     }
                 }
             }
+
         }
+
     }
 }
 
 
-private fun HTML.baranHead3() {
+private fun HTML.baranHead2() {
     head {
         meta(charset = "UTF-8")
         meta(name = "viewport", content = "width=device-width, initial-scale=1.0")
@@ -76,7 +62,7 @@ private fun HTML.baranHead3() {
 
 //fun DIV.workoutContent2( workoutPlan: WorkoutPlan) {
 // Generates the content of the workout plan
-fun DIV.workoutContent3() {
+fun DIV.workoutContent2() {
     h1 { +trainingProgram.title }
     h2 {
         +"مربی: "

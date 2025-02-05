@@ -1,4 +1,4 @@
-package baranfit.ir.Baran
+package baranfit.ir.baran
 
 import baranfit.ir.tmp.respondCss
 import io.ktor.server.application.*

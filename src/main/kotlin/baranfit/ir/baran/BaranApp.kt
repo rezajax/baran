@@ -1,4 +1,4 @@
-package baranfit.ir.Baran
+package baranfit.ir.baran
 
 import baranfit.ir.data.WorkoutPlan
 import baranfit.ir.data.workoutPlan
@@ -21,7 +21,7 @@ fun Application.baranApp() {
         }
     }
     routing {
-        get("/") {
+        get("/0") {
             call.respondHtml {
                 baranHead()
                 body {
