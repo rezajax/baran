@@ -3,7 +3,8 @@ ktor:
     modules:
       - baranfit.ir.ApplicationKt.module
   deployment:
-    port: 443
+    port: 80
+    sslPort: 443
 
   security:
     ssl:
