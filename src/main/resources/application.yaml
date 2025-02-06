@@ -3,4 +3,11 @@ ktor:
     modules:
       - baranfit.ir.ApplicationKt.module
   deployment:
-    port: 8080
+    port: 443
+
+  security:
+    ssl:
+      keyStore: "/etc/letsencrypt/live/baranfit.ir/privkey.pem"
+      keyAlias: sampleAlias
+      keyStorePassword: 123
+      privateKeyPassword: 123

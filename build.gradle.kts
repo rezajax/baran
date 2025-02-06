@@ -21,8 +21,11 @@ repositories {
     mavenCentral()
     maven { url = uri("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers") }
 }
-
+val ktor_version = "3.0.2"
 dependencies {
+
+    implementation("io.ktor:ktor-network-tls-certificates:$ktor_version")
+
     implementation(libs.ktor.server.core.jvm)
     implementation(libs.ktor.server.thymeleaf.jvm)
     implementation(libs.ktor.server.html.builder.jvm)
