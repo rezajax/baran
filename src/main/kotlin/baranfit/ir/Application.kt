@@ -42,7 +42,7 @@ fun Application.module() {
 
 private fun ApplicationEngine.Configuration.envConfig() {
 
-    val keyStoreFile = File("build/keystore.jks")
+    val keyStoreFile = File("/root/deploy/keystore.jks")
     val keyStore = buildKeyStore {
         certificate("sampleAlias") {
             password = "foobar"
