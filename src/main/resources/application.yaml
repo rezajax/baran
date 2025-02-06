@@ -7,7 +7,7 @@ ktor:
 
   security:
     ssl:
-      keyStore: "/etc/letsencrypt/live/baranfit.ir/keystore.p12"
+      keyStore: "/root/deploy/keystore.jks"
       keyAlias: sampleAlias
-      keyStorePassword: 123
-      privateKeyPassword: 123
+      keyStorePassword: 123456
+      privateKeyPassword: 123456
