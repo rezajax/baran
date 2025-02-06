@@ -85,7 +85,7 @@ fun DIV.workoutContent3() {
 
     div(classes = "info") {
         p {
-            strong { +"نام ورزشکار: " }
+            strong { +"نام ورزشکار:  تست" }
             span(classes = "athlete-name") { +trainingProgram.trainerName }
         }
         p {
