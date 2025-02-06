@@ -16,10 +16,10 @@ import org.slf4j.LoggerFactory
 import java.io.File
 
 fun main(args: Array<String>) {
-
-    embeddedServer(Netty, applicationEnvironment { log = LoggerFactory.getLogger("ktor.application") }, {
+    io.ktor.server.netty.EngineMain.main(args)
+/*    embeddedServer(Netty, applicationEnvironment { log = LoggerFactory.getLogger("ktor.application") }, {
         envConfig()
-    }, module = Application::module).start(wait = true)
+    }, module = Application::module).start(wait = true)*/
 }
 
 fun Application.module() {
@@ -31,15 +31,17 @@ fun Application.module() {
 
     baranAppCss()
 
-    routing {
+/*    routing {
         get("/ss") {
             call.respondText("Hello, world!")
         }
-    }
+    }*/
 }
 
 
 
+
+/*
 private fun ApplicationEngine.Configuration.envConfig() {
 
     val keyStoreFile = File("build/keystore.jks")
@@ -64,3 +66,4 @@ private fun ApplicationEngine.Configuration.envConfig() {
     }
 }
 
+*/
